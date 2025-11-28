@@ -28,6 +28,17 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add data/*.json
+          
+          # Debug: List files
+          ls -R
+          
+          # Add data directory if it exists
+          if [ -d "data" ]; then
+            git add data/
+          else
+            echo "Data directory not found!"
+            exit 1
+          fi
+          
           # Only commit if there are changes
           git diff --quiet && git diff --staged --quiet || (git commit -m "Update fund prices" && git push)

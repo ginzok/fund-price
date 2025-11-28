@@ -11,7 +11,7 @@ BASE_URL = "https://developer.am.mufg.jp/fund_information_latest/fund_cd/"
 
 def load_funds():
     if not os.path.exists(FUNDS_FILE):
-        print(f"Error: {FUNDS_FILE} not found.")
+        print(f"Error: {FUNDS_FILE} not found at {os.path.abspath(FUNDS_FILE)}")
         return []
     with open(FUNDS_FILE, 'r') as f:
         return json.load(f)
@@ -45,6 +45,11 @@ def save_data(fund_code, data):
     print(f"Saved data for {fund_code} to {file_path}")
 
 def main():
+    # Ensure data directory exists
+    if not os.path.exists(DATA_DIR):
+        os.makedirs(DATA_DIR)
+        print(f"Created directory: {DATA_DIR}")
+
     funds = load_funds()
     if not funds:
         print("No funds to process.")

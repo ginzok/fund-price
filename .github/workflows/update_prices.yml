@@ -2,8 +2,8 @@ name: Update Fund Prices
 
 on:
   schedule:
-    # Run daily at 18:00 JST (09:00 UTC)
-    - cron: '0 9 * * *'
+    # Run daily at 23:30 JST (14:30 UTC)
+    - cron: '30 14 * * *'
   workflow_dispatch:
 
 permissions:
